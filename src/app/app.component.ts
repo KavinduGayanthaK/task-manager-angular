@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { SideNavigationComponent } from "./side-navigation/side-navigation.component";
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
-  imports: [SideNavigationComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [RouterModule],
+  template: '<router-outlet></router-outlet>'
 })
 export class AppComponent {
   title = 'task-manager-angular';
