@@ -1,0 +1,65 @@
+/* Container for better layout (optional) */
+
+.task-controls {
+    display: flex;
+    gap: 16px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  
+  
+  /* Stylish Add Task Button */
+  button[mat-raised-button] {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 10px 24px;
+    border: none;
+    width: 120px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+  }
+  
+  button[mat-raised-button]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #5f0ac3, #1e6dfd);
+  }
+  
+  button[mat-raised-button]:active {
+    transform: scale(0.98);
+  }
+  
+  .task-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 85vh; 
+    
+  }
+  
+  /* Scrollable card section */
+  .task-cards-scroll {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 20px;
+    padding-right: 10px;
+    max-height: 75vh; /* You can adjust this */
+  }
+  
+  /* Optional: add a scrollbar style */
+  .task-cards-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .task-cards-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .task-cards-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+  
