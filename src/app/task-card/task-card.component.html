@@ -1,5 +1,5 @@
 <mat-card class="modern-card">
-  <mat-card-header class="card-header">
+  <mat-card-header class="card-header" [ngClass]="getStatusClass(task.status)">
     <div>
       <mat-card-title class="card-title">{{ task.title }}</mat-card-title>
       <mat-card-subtitle class="card-subtitle">{{ task.status }}</mat-card-subtitle>
