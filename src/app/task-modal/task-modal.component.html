@@ -1,0 +1,59 @@
+<h2 mat-dialog-title class="dialog-title">Create New Task</h2>
+<mat-dialog-content class="dialog-content">
+  <form [formGroup]="taskForm" class="task-form">
+    <div class="form-grid">
+      <!-- Task ID -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Task ID</mat-label>
+        <input matInput formControlName="taskId" type="number" class="input-field">
+        
+      </mat-form-field>
+
+      <!-- Status -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status" class="status-select">
+          <mat-option value="new" class="status-option new">
+            <span class="status-dot"></span> New
+          </mat-option>
+          <mat-option value="in-progress" class="status-option in-progress">
+            <span class="status-dot"></span> In Progress
+          </mat-option>
+          <mat-option value="completed" class="status-option completed">
+            <span class="status-dot"></span> Completed
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Title -->
+      <mat-form-field appearance="outline" class="form-field full-width">
+        <mat-label>Task Title</mat-label>
+        <input matInput formControlName="title" class="input-field">
+       
+      </mat-form-field>
+
+      <!-- Created At -->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Due Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="createdAt">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        
+      </mat-form-field>
+
+      <!-- Description -->
+      <mat-form-field appearance="outline" class="form-field full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" rows="4" class="description-field"></textarea>
+       
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="onCancel()" class="cancel-btn">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" class="submit-btn">
+     Create Task
+  </button>
+</mat-dialog-actions>
