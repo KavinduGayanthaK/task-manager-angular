@@ -82,3 +82,55 @@
 .status-default {
   background: linear-gradient(135deg, #6c757d, #adb5bd);
 }
+
+.task-card-actions {
+  display: flex;
+  gap: 12px;
+  margin-left: auto;
+  padding: 8px 0;
+}
+
+/* Update Button */
+.task-card-actions button[color="accent"] {
+  background-color: rgba(5, 120, 49, 0.1);
+  border: 1px solid #017d13;
+  border-radius: 20px;
+  padding: 8px 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.task-card-actions button[color="accent"]:hover {
+  background-color: #00bc32;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 64, 129, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Delete Button */
+.task-card-actions button[color="warn"] {
+  background-color: rgba(244, 67, 54, 0.1);
+  border: 1px solid #f44336;
+  border-radius: 20px;
+  padding: 8px 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.task-card-actions button[color="warn"]:hover {
+  background-color: #f44336;
+  color: white;
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Optional: Add icons */
+.task-card-actions button mat-icon {
+  margin-right: 8px;
+  font-size: 18px;
+  vertical-align: middle;
+}

@@ -41,40 +41,47 @@ export class TaskModalComponent {
   taskForm: FormGroup;
 
   constructor(
-    private taskServiceService: TaskService,
+    private taskService: TaskService,
     public dialogRef: MatDialogRef<TaskModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     fb: FormBuilder
   ) {
     this.taskForm = fb.group({
-      taskId: [null, Validators.required],
+      id: [null, Validators.required],
       title: ['', Validators.required],
       description: ['', Validators.required],
       status: ['', Validators.required],
       createdAt: [new Date(), Validators.required],
     });
+    if (data) {
+      this.taskForm.patchValue(data); 
+    }
   }
+ 
 
   onSubmit() {
     if (this.taskForm.valid) {
-      this.taskServiceService.createTask(this.taskForm.value).subscribe({
-        next: (res) => {
-          console.log('Success:', res);
-          this.dialogRef.close(this.taskForm.value);
-        },
-        error: (err) => {
-          if (err.status === 201 && err.ok === false) {
-            console.log('Received 201 Created, treating as success anyway:', err);
-            this.dialogRef.close(this.taskForm.value);
-          } else {
-            console.error('Actual error:', err);
-          }
-        }
-    });
-      this.dialogRef.close(this.taskForm.value);
+      if (this.data?.id) {
+        this.updateTask();
+      } else {
+        this.createTask();
+      }
     }
   }
 
+  createTask() {
+    this.taskService.createTask(this.taskForm.value).subscribe({
+      next: (res) => this.dialogRef.close(this.taskForm.value),
+      error: (err) => console.error('Error creating task:', err)
+    });
+  }
+
+  updateTask() {
+    this.taskService.updateTask(this.taskForm.value,this.taskForm.value.id).subscribe({
+      next: (res) => this.dialogRef.close(this.taskForm.value),
+      error: (err) => console.error('Error updating task:', err)
+    });
+  }
   onCancel(): void {
     this.dialogRef.close();
   }

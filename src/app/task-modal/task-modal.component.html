@@ -1,15 +1,16 @@
-<h2 mat-dialog-title class="dialog-title">Create New Task</h2>
+<h2 mat-dialog-title class="dialog-title">
+  {{ data?.taskId ? 'Edit Task' : 'Create New Task' }}
+</h2>
 <mat-dialog-content class="dialog-content">
   <form [formGroup]="taskForm" class="task-form">
     <div class="form-grid">
-      <!-- Task ID -->
+      
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Task ID</mat-label>
-        <input matInput formControlName="taskId" type="number" class="input-field">
-        
+        <input matInput formControlName="id" type="number" class="input-field" [readonly]="data?.id">
       </mat-form-field>
 
-      <!-- Status -->
+   
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Status</mat-label>
         <mat-select formControlName="status" class="status-select">
@@ -25,27 +26,24 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- Title -->
+   
       <mat-form-field appearance="outline" class="form-field full-width">
         <mat-label>Task Title</mat-label>
         <input matInput formControlName="title" class="input-field">
-       
       </mat-form-field>
 
-      <!-- Created At -->
+     
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Due Date</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="createdAt">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        
       </mat-form-field>
 
-      <!-- Description -->
+     
       <mat-form-field appearance="outline" class="form-field full-width">
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="description" rows="4" class="description-field"></textarea>
-       
       </mat-form-field>
     </div>
   </form>
@@ -54,6 +52,6 @@
 <mat-dialog-actions class="dialog-actions">
   <button mat-button (click)="onCancel()" class="cancel-btn">Cancel</button>
   <button mat-raised-button color="primary" (click)="onSubmit()" class="submit-btn">
-     Create Task
+    {{ data?.id ? 'Update Task' : 'Create Task' }}
   </button>
 </mat-dialog-actions>

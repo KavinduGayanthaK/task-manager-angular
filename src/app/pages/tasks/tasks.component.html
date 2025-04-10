@@ -1,29 +1,43 @@
 <div class="task-container">
-  <button mat-raised-button (click)="openTaskModal()">Add Task</button>
+  <button mat-raised-button color="primary" (click)="openTaskModal()">Add Task</button>
 
   <div class="task-controls">
     <mat-form-field appearance="outline">
       <mat-label>Search Tasks</mat-label>
       <input matInput placeholder="Type to search..." [(ngModel)]="searchText" />
     </mat-form-field>
-
-    
-
-    <mat-form-field appearance="outline">
-      <mat-label>Filter by Status</mat-label>
-      <mat-select [(value)]="statusFilter">
-        <mat-option value="">All</mat-option>
-        <mat-option value="new">New</mat-option>
-        <mat-option value="In Progress">In Progress</mat-option>
-        <mat-option value="completed">Completed</mat-option>
-      </mat-select>
-    </mat-form-field>
   </div>
 
-  <div class="task-cards-scroll">
-    <app-task-card
-      *ngFor="let task of filteredTasks()"
+
+  <div class="scrollable-sections">
+    <div class="task-section">
+      <h3>Pending</h3>
+      <app-task-card
+      *ngFor="let task of tasks of filteredTasksByStatus('new')"
       [task]="task"
+      (taskUpdated)="onTaskUpdated($event)"
+      (taskDeleted)="onTaskDeleted($event)"
     ></app-task-card>
+    </div>
+
+    <div class="task-section">
+      <h3>In Progress</h3>
+      <app-task-card
+        *ngFor="let task of filteredTasksByStatus('In Progress')"
+        [task]="task"
+        (taskUpdated)="openTaskModal(task)"
+        (taskDeleted)="onTaskDeleted(task)"
+      ></app-task-card>
+    </div>
+
+    <div class="task-section">
+      <h3>Completed</h3>
+      <app-task-card
+        *ngFor="let task of filteredTasksByStatus('completed')"
+        [task]="task"
+        (taskUpdated)="openTaskModal(task)"
+        (taskDeleted)="onTaskDeleted(task)"
+      ></app-task-card>
+    </div>
   </div>
 </div>

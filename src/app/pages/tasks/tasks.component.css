@@ -62,4 +62,38 @@
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
   }
+  /* tasks.component.css */
+.task-section-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .task-section {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+ 
+  .scrollable-sections {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  
+    height: 70vh; /* or adjust to your layout */
+    overflow-y: auto;
+    padding-right: 1rem;
+  }
+  
+
+  
+  .task-section h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #3f51b5;
+  }
   

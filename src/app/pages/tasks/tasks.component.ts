@@ -33,44 +33,52 @@ export class TasksComponent implements OnInit {
   sortBy: string = 'newest';
   statusFilter: string = '';
 
-  constructor(private taskService: TaskService, private dialog: MatDialog) {}
-
+  constructor(private taskService: TaskService, private dialog: MatDialog) {
+    this.loadTasks();
+  }
   ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+ 
+
+  loadTasks() {
     this.taskService.getData().subscribe({
       next: (res: Itask[]) => (this.tasks = res),
-      error: (err) => console.error(err),
+      error: (err) => console.error('Error fetching tasks', err),
     });
   }
 
-  openTaskModal() {
+  openTaskModal(task?: any): void {
     const dialogRef = this.dialog.open(TaskModalComponent, {
       width: '500px',
+      data: task || null
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.tasks.push(result);
+        this.loadTasks();
       }
     });
+  }
+  
 
-    dialogRef.afterClosed().subscribe((result: Itask | undefined) => {
-      if (result) this.tasks.push(result);
+  filteredTasksByStatus(status: string): Itask[] {
+    return this.tasks.filter(task =>
+      (task.status?.toLowerCase() === status.toLowerCase()) &&
+      (task.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
+       task.description.toLowerCase().includes(this.searchText.toLowerCase()))
+    );
+  }
+  
+  onTaskUpdated(task: any) {
+    this.openTaskModal(task); 
+  }
+
+  onTaskDeleted(task: any) {
+    this.taskService.deleteTask(task.id).subscribe(() => {
+      this.loadTasks();
     });
   }
-  filteredTasks() {
-    let filtered = this.tasks.filter(task =>
-      task.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
-      task.description.toLowerCase().includes(this.searchText.toLowerCase())
-    );
 
-    // Apply status filter if selected
-    if (this.statusFilter) {
-      filtered = filtered.filter(task => task.status === this.statusFilter);
-    }
-
-    // Sorting based on the selected sort option
-    
-
-    return filtered;
-  }
 }
