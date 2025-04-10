@@ -1,0 +1,17 @@
+<mat-card class="modern-card">
+  <mat-card-header class="card-header">
+    <div>
+      <mat-card-title class="card-title">{{ task.title }}</mat-card-title>
+      <mat-card-subtitle class="card-subtitle">{{ task.status }}</mat-card-subtitle>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content class="card-content">
+    <p>{{ task.description }}</p>
+  </mat-card-content>
+
+  <mat-card-footer class="card-footer">
+    <mat-chip class="status-chip" color="primary">{{ task.status }}</mat-chip>
+    <mat-chip class="date-chip" color="accent">{{ getFormattedDate(task.createdAt) }}</mat-chip>
+  </mat-card-footer>
+</mat-card>
